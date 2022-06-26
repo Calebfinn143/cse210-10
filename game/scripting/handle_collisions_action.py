@@ -1,5 +1,6 @@
 import constants
 from game.casting.actor import Actor
+from game.casting.cycler_one import cycler_one
 from game.scripting.action import Action
 from game.shared.point import Point
 
@@ -35,9 +36,9 @@ class HandleCollisionsAction(Action):
         Args:
             cast (Cast): The cast of Actors in the game.
         """
-        snake = cast.get_first_actor("snakes")
-        head = snake.get_segments()[0]
-        segments = snake.get_segments()[1:]
+        cycler_one = cast.get_first_actor("cycler")
+        head = cycler_one.get_segments()[0]
+        segments = cycler_one.get_segments()[1:]
         
         for segment in segments:
             if head.get_position().equals(segment.get_position()):
@@ -50,8 +51,8 @@ class HandleCollisionsAction(Action):
             cast (Cast): The cast of Actors in the game.
         """
         if self._is_game_over:
-            snake = cast.get_first_actor("snakes")
-            segments = snake.get_segments()
+            cycler_one = cast.get_first_actor("cycler")
+            segments = cycler_one.get_segments()
 
             x = int(constants.MAX_X / 2)
             y = int(constants.MAX_Y / 2)

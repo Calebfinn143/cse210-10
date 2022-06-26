@@ -1,3 +1,4 @@
+from game.casting.cycler_one import cycler_one
 from game.scripting.action import Action
 
 
@@ -27,9 +28,8 @@ class DrawActorsAction(Action):
             script (Script): The script of Actions in the game.
         """
         score = cast.get_first_actor("scores")
-        food = cast.get_first_actor("foods")
-        snake = cast.get_first_actor("snakes")
-        segments = snake.get_segments()
+        cycler_one = cast.get_first_actor("cycler")
+        segments = cycler_one.get_segments()
         messages = cast.get_actors("messages")
 
         self._video_service.clear_buffer()
