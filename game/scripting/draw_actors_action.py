@@ -1,4 +1,3 @@
-from game.casting.cycler_one import cycler_one
 from game.scripting.action import Action
 
 
@@ -30,10 +29,13 @@ class DrawActorsAction(Action):
         score = cast.get_first_actor("scores")
         cycler_one = cast.get_first_actor("cycler")
         segments = cycler_one.get_segments()
+        cycler_two = cast.get_second_actor("cycler")
+        segments_two = cycler_two.get_segments()
         messages = cast.get_actors("messages")
 
         self._video_service.clear_buffer()
         self._video_service.draw_actors(segments)
+        self._video_service.draw_actors(segments_two)
         self._video_service.draw_actor(score)
         self._video_service.draw_actors(messages, True)
         self._video_service.flush_buffer()
