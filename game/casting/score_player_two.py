@@ -1,7 +1,8 @@
 from game.casting.actor import Actor
+from game.shared.point import Point
 
 
-class Score(Actor):
+class ScorePlayerTwo(Actor):
     """
     A record of points made or lost. 
     
@@ -16,6 +17,7 @@ class Score(Actor):
         super().__init__()
         self._points = 0
         self.add_points(0)
+        self._position = Point(700, 0)
 
     def add_points(self, points):
         """Adds the given points to the score's total points.
@@ -24,4 +26,4 @@ class Score(Actor):
             points (int): The points to add.
         """
         self._points += points
-        self.set_text(f"Player one: {self._points}")
+        self.set_text(f"Player two: {self._points}")

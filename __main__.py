@@ -1,7 +1,8 @@
 import constants
 
 from game.casting.cast import Cast
-from game.casting.score import Score
+from game.casting.score_player_one import ScorePlayerOne
+from game.casting.score_player_two import ScorePlayerTwo
 from game.casting.cycler_one import cycler_one
 from game.casting.cycler_two import cycler_two
 from game.scripting.script import Script
@@ -23,7 +24,8 @@ def main():
     cast = Cast()
     cast.add_actor("cycler", cycler_one())
     cast.add_actor("cycler", cycler_two())
-    cast.add_actor("scores", Score())
+    cast.add_actor("scores", ScorePlayerOne())
+    cast.add_actor("scores", ScorePlayerTwo())
    
     # start the game
     keyboard_service = KeyboardService()
