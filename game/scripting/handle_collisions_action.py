@@ -1,3 +1,4 @@
+from pickle import TRUE
 import constants
 from game.casting.actor import Actor
 from game.casting.cycler_one import cycler_one
@@ -45,6 +46,7 @@ class HandleCollisionsAction(Action):
         for segment in segments:
             if head_one.get_position().equals(segment.get_position()) or head_two.get_position().equals(segment.get_position()):
                 self._is_game_over = True
+                constants.GAME_OVER = TRUE
         
     def _handle_game_over(self, cast):
         """Shows the 'game over' message and turns the snake and food white if the game is over.
