@@ -37,11 +37,13 @@ class HandleCollisionsAction(Action):
             cast (Cast): The cast of Actors in the game.
         """
         cycler_one = cast.get_first_actor("cycler")
-        head = cycler_one.get_segments()[0]
-        segments = cycler_one.get_segments()[1:]
+        cycler_two = cast.get_second_actor("cycler")
+        head_one = cycler_one.get_segments()[0]
+        head_two = cycler_two.get_segments()[0]
+        segments = cycler_one.get_segments()[1:] + cycler_two.get_segments()[1:]
         
         for segment in segments:
-            if head.get_position().equals(segment.get_position()):
+            if head_one.get_position().equals(segment.get_position()) or head_two.get_position().equals(segment.get_position()):
                 self._is_game_over = True
         
     def _handle_game_over(self, cast):
@@ -52,7 +54,8 @@ class HandleCollisionsAction(Action):
         """
         if self._is_game_over:
             cycler_one = cast.get_first_actor("cycler")
-            segments = cycler_one.get_segments()
+            cycler_two = cast.get_second_actor("cycler")
+            segments = cycler_one.get_segments() + cycler_two.get_segments()
 
             x = int(constants.MAX_X / 2)
             y = int(constants.MAX_Y / 2)
