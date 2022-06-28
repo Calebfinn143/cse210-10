@@ -2,6 +2,8 @@ from pickle import TRUE
 import constants
 from game.casting.actor import Actor
 from game.casting.cycler_one import cycler_one
+from game.casting.score_player_one import ScorePlayerOne
+from game.casting.score_player_two import ScorePlayerTwo
 from game.scripting.action import Action
 from game.shared.point import Point
 
@@ -37,6 +39,8 @@ class HandleCollisionsAction(Action):
         Args:
             cast (Cast): The cast of Actors in the game.
         """
+        score_player_one = cast.get_first_actor("scores")
+        score_player_two = cast.get_second_actor("scores")
         cycler_one = cast.get_first_actor("cycler")
         cycler_two = cast.get_second_actor("cycler")
         head_one = cycler_one.get_segments()[0]
@@ -44,9 +48,15 @@ class HandleCollisionsAction(Action):
         segments = cycler_one.get_segments()[1:] + cycler_two.get_segments()[1:]
         
         for segment in segments:
-            if head_one.get_position().equals(segment.get_position()) or head_two.get_position().equals(segment.get_position()):
+            if head_one.get_position().equals(segment.get_position()):
                 self._is_game_over = True
                 constants.GAME_OVER = TRUE
+                score_player_two.add_points(1)
+
+            if head_two.get_position().equals(segment.get_position()):
+                self._is_game_over = True
+                constants.GAME_OVER = TRUE
+                score_player_one.add_points(1)
         
     def _handle_game_over(self, cast):
         """Shows the 'game over' message and turns the snake and food white if the game is over.
